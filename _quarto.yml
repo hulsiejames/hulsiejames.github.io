@@ -1,0 +1,57 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+    - "articles/**/*.qmd"
+    - "!templates/**"
+
+website:
+  title: "James Hulse"
+  site-url: "https://hulsiejames.github.io"
+  description: "Data, transport and places — analysis, notes and reproducible vignettes by James Hulse."
+  favicon: assets/favicon.svg
+  open-graph: true
+  twitter-card: true
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    pinned: true
+    left:
+      - text: Writing
+        href: writing.qmd
+      - text: Projects
+        href: projects.qmd
+      - text: About
+        href: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/hulsiejames
+        aria-label: GitHub profile
+      - icon: rss
+        href: writing.xml
+        aria-label: Writing RSS feed
+  page-footer:
+    left: "© 2026 James Hulse"
+    right:
+      - text: "Built with Quarto"
+        href: https://quarto.org/
+
+format:
+  html:
+    theme:
+      - cosmo
+      - theme.scss
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto
+
+language:
+  search-text-placeholder: "Search notes, methods and projects"

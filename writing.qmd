@@ -1,0 +1,20 @@
+---
+title: "Writing & vignettes"
+description: "Analysis, working notes and reproducible examples."
+listing:
+  contents: "articles"
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  fields: [title, description, date, categories, reading-time]
+  categories: true
+  sort-ui: [date, title, reading-time]
+  filter-ui: true
+  page-size: 12
+  feed:
+    type: full
+    title: "James Hulse — writing and vignettes"
+page-layout: full
+---
+
+Methods, analysis and useful fragments. Use the search and category filters to find a topic, or start with the interactive example below.

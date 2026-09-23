@@ -1,0 +1,66 @@
+---
+title: "James Hulse"
+toc: false
+page-layout: full
+listing:
+  id: latest-writing
+  contents: "articles"
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  max-items: 4
+  fields: [title, description, date, categories, reading-time]
+  categories: false
+  sort-ui: false
+  filter-ui: false
+---
+
+::: {.hero-shell}
+::: {.hero-kicker}
+Data science · transport · place
+:::
+
+::: {.hero-title}
+Evidence you can inspect.
+:::
+
+::: {.hero-copy}
+I’m James Hulse, a data scientist in Manchester. This is where I publish analysis, working notes and reproducible vignettes—especially around transport, spatial data and the places we move through.
+:::
+
+::: {.hero-actions}
+[Read the writing](writing.qmd){.btn .btn-primary role="button"}
+[View projects](projects.qmd){.btn .btn-outline-light role="button"}
+:::
+:::
+
+::: {.section-kicker}
+What lives here
+:::
+
+::: {.intro-grid}
+::: {.intro-card}
+### Analysis
+
+Questions, methods and findings written for people who want to understand the reasoning—not just the result.
+:::
+
+::: {.intro-card}
+### Reproducible vignettes
+
+Code, data notes and outputs kept together so an analysis can be checked, adapted and run again.
+:::
+
+::: {.intro-card}
+### Interactive explanations
+
+Maps, charts and small controls that let readers explore what changes when the assumptions change.
+:::
+:::
+
+## Latest writing
+
+::: {#latest-writing}
+:::
+
+[See all writing →](writing.qmd){.more-link}

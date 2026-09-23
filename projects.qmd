@@ -1,0 +1,26 @@
+---
+title: "Projects"
+description: "Selected open work and collaborations."
+---
+
+These are projects I have contributed to or use as a home for open, reproducible work.
+
+::: {.project-grid}
+::: {.project-card}
+### OpenInfra
+
+Open tools, datasets and documentation for understanding transport infrastructure, developed collaboratively at the University of Leeds.
+
+[View the project](https://udsleeds.github.io/openinfra/) · [Source on GitHub](https://github.com/udsleeds/openinfra)
+:::
+
+::: {.project-card}
+### This website
+
+A Quarto publishing system for articles, analysis and interactive vignettes. The complete source and revision history are public.
+
+[Source on GitHub](https://github.com/hulsiejames/hulsiejames.github.io)
+:::
+:::
+
+More projects can be added here as they are ready to share. Each can link to a repository, a live tool, or a longer case study on this site.

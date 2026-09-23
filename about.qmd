@@ -1,0 +1,15 @@
+---
+title: "About"
+description: "About James Hulse and this site."
+---
+
+I’m James Hulse, a data scientist based in Manchester. I work with data to understand transport, infrastructure and place, using tools including R, Python and spatial analysis.
+
+This site is my space for publishing work in the open. Some pieces will be short notes; others will be full reproducible vignettes with code, data provenance, assumptions and interactive outputs. The aim is simple: make the route from question to conclusion visible.
+
+## Elsewhere
+
+- [GitHub](https://github.com/hulsiejames) — code, projects and contributions
+- [OpenInfra](https://udsleeds.github.io/openinfra/) — collaborative work on open transport infrastructure data
+
+Unless an article says otherwise, views expressed here are my own.

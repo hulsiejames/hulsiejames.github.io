@@ -1,0 +1,81 @@
+/*-- scss:defaults --*/
+
+$navy: #102a43;
+$ink: #243b53;
+$teal: #008b7a;
+$coral: #d95d45;
+$mist: #f4f8fb;
+$paper: #ffffff;
+
+$primary: $teal;
+$body-bg: $paper;
+$body-color: $ink;
+$link-color: #007d70;
+$link-hover-color: #005d55;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$headings-font-family: Georgia, "Times New Roman", serif;
+$headings-color: $navy;
+$border-color: #d8e3ea;
+$code-color: #b33f2b;
+$code-bg: #edf4f7;
+
+/*-- scss:rules --*/
+
+body {
+  font-size: 1.02rem;
+  line-height: 1.72;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em;
+}
+
+a {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+code {
+  border-radius: 0.22rem;
+  padding: 0.08rem 0.25rem;
+}
+
+.navbar {
+  background: $navy;
+  border-bottom: 3px solid $teal;
+}
+
+.navbar-brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: #f7fbfd;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+  color: #7ce5d5;
+}
+
+.quarto-title-meta-heading {
+  color: #557086;
+}
+
+.quarto-title-meta-contents {
+  color: $ink;
+}
+
+.callout {
+  border-radius: 0.25rem;
+}
+
+.table {
+  --bs-table-striped-bg: #f5f9fb;
+}

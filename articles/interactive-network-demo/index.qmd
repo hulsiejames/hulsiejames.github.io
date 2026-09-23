@@ -1,0 +1,113 @@
+---
+title: "An interactive transport profile"
+subtitle: "A small demonstration of a reproducible, explorable vignette"
+description: "Change mode and peak intensity to explore a synthetic daily travel profile, with the method and assumptions kept beside the result."
+date: 2026-09-23
+categories: [interactive, transport, Observable JS]
+draft: false
+---
+
+::: {.vignette-summary}
+**This is a demonstration, not a real dataset.** It shows the kind of interactive, well-documented analysis this site can host: a question, an explicit method, an explorable result and enough source to reproduce it.
+:::
+
+## The question
+
+How does the shape of a daily travel profile change by mode, and what happens when the morning peak becomes more pronounced?
+
+The chart below is generated in the reader’s browser with Observable JS. It needs no server and works on a static GitHub Pages site.
+
+## Explore the profile
+
+```{ojs}
+viewof mode = Inputs.radio(
+  ["Cycle", "Walk", "Bus"],
+  {value: "Cycle", label: "Mode"}
+)
+
+viewof peakFactor = Inputs.range(
+  [0.6, 1.6],
+  {value: 1, step: 0.05, label: "Peak intensity"}
+)
+```
+
+```{ojs}
+hours = Array.from({length: 24}, (_, hour) => hour)
+
+modeSettings = ({
+  Cycle: {base: 18, morning: 64, evening: 52, colour: "#008b7a"},
+  Walk:  {base: 28, morning: 40, evening: 36, colour: "#d95d45"},
+  Bus:   {base: 24, morning: 82, evening: 68, colour: "#2f6f9f"}
+})
+
+profile = hours.map(hour => {
+  const settings = modeSettings[mode]
+  const morningPeak = settings.morning * peakFactor * Math.exp(-0.5 * ((hour - 8) / 1.65) ** 2)
+  const eveningPeak = settings.evening * peakFactor * Math.exp(-0.5 * ((hour - 17) / 2.05) ** 2)
+  const nightReduction = hour < 6 || hour > 22 ? -settings.base * 0.72 : 0
+
+  return {
+    hour,
+    trips: Math.max(2, Math.round(settings.base + morningPeak + eveningPeak + nightReduction))
+  }
+})
+
+Plot.plot({
+  width,
+  height: Math.max(300, Math.min(390, width * 0.62)),
+  marginLeft: 58,
+  marginBottom: 48,
+  style: {fontSize: "13px", background: "transparent"},
+  x: {label: "Hour of day", domain: [0, 23], ticks: 12},
+  y: {label: "Synthetic trips", grid: true, domain: [0, 180]},
+  marks: [
+    Plot.ruleY([0]),
+    Plot.areaY(profile, {
+      x: "hour",
+      y: "trips",
+      fill: modeSettings[mode].colour,
+      fillOpacity: 0.16,
+      curve: "catmull-rom"
+    }),
+    Plot.lineY(profile, {
+      x: "hour",
+      y: "trips",
+      stroke: modeSettings[mode].colour,
+      strokeWidth: 3,
+      curve: "catmull-rom",
+      tip: true
+    }),
+    Plot.dot(profile, {
+      x: "hour",
+      y: "trips",
+      fill: modeSettings[mode].colour,
+      r: 2.5,
+      tip: true
+    })
+  ]
+})
+```
+
+## What to look for
+
+The demonstration deliberately separates three elements:
+
+1. **The baseline** represents movement that occurs throughout the day.
+2. **Two Gaussian peaks** represent morning and evening demand.
+3. **The control** applies the same multiplier to both peaks, making the assumption visible and easy to challenge.
+
+Changing mode swaps in a different set of synthetic parameters. Walking has a flatter profile; bus travel has stronger commute peaks; cycling sits between them. These are illustrative shapes only, not empirical estimates.
+
+## Reproduce or adapt it
+
+The complete calculation is in the code cell above. A real analysis could replace `modeSettings` with a CSV file, an API response or the output of an R/Python data pipeline. Quarto can then keep the narrative, citations, code and interactive result together in one page.
+
+For a production analysis I would also record:
+
+- the source, licence and retrieval date of every input;
+- cleaning and exclusion decisions;
+- the software environment or lockfile;
+- uncertainty and sensitivity checks; and
+- a stable snapshot of any source that changes over time.
+
+That is the pattern this site is set up to support.

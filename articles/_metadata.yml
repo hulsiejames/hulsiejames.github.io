@@ -1,0 +1,11 @@
+author: "James Hulse"
+title-block-banner: false
+toc: true
+toc-location: right
+code-fold: true
+code-summary: "Show the code"
+code-tools: true
+execute:
+  freeze: auto
+  warning: false
+  message: false
