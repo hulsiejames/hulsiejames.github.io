@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/writing.html",
+    "items": [
+      "/articles/interactive-network-demo/index.html",
+      "/articles/reproducible-vignette-pattern/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/articles/interactive-network-demo/index.html",
+      "/articles/reproducible-vignette-pattern/index.html"
+    ]
+  }
+]

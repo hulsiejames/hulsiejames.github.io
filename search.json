@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "writing.html",
+    "href": "writing.html",
+    "title": "Writing & vignettes",
+    "section": "",
+    "text": "Methods, analysis and useful fragments. Use the search and category filters to find a topic, or start with the interactive example below.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Title\n      \n      \n        Reading Time (Low to High)\n      \n      \n        Reading Time (High to Low)\n      \n    \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nAn interactive transport profile\n\n3 min\n\n\ninteractive\n\ntransport\n\nObservable JS\n\n\n\nChange mode and peak intensity to explore a synthetic daily travel profile, with the method and assumptions kept beside the result.\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\nA practical pattern for reproducible vignettes\n\n2 min\n\n\nreproducibility\n\nQuarto\n\nmethods\n\n\n\nA reusable structure for publishing analysis that readers can understand, inspect and reproduce.\n\n\n\nSep 22, 2026\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "James Hulse",
+    "section": "",
+    "text": "Data science · transport · place\n\n\nEvidence you can inspect.\n\n\nI’m James Hulse, a data scientist in Manchester. This is where I publish analysis, working notes and reproducible vignettes—especially around transport, spatial data and the places we move through.\n\n\nRead the writing View projects"
+  },
+  {
+    "objectID": "index.html#latest-writing",
+    "href": "index.html#latest-writing",
+    "title": "James Hulse",
+    "section": "Latest writing",
+    "text": "Latest writing\n\n\n\n\n\n\n\nAn interactive transport profile\n\n3 min\n\n\ninteractive\n\ntransport\n\nObservable JS\n\n\n\nChange mode and peak intensity to explore a synthetic daily travel profile, with the method and assumptions kept beside the result.\n\n\n\nSep 23, 2026\n\n\n\n\n\n\n\n\n\n\nA practical pattern for reproducible vignettes\n\n2 min\n\n\nreproducibility\n\nQuarto\n\nmethods\n\n\n\nA reusable structure for publishing analysis that readers can understand, inspect and reproduce.\n\n\n\nSep 22, 2026\n\n\n\n\n\n\nNo matching items\n\nSee all writing →"
+  },
+  {
+    "objectID": "articles/interactive-network-demo/index.html",
+    "href": "articles/interactive-network-demo/index.html",
+    "title": "An interactive transport profile",
+    "section": "",
+    "text": "This is a demonstration, not a real dataset. It shows the kind of interactive, well-documented analysis this site can host: a question, an explicit method, an explorable result and enough source to reproduce it."
+  },
+  {
+    "objectID": "articles/interactive-network-demo/index.html#the-question",
+    "href": "articles/interactive-network-demo/index.html#the-question",
+    "title": "An interactive transport profile",
+    "section": "The question",
+    "text": "The question\nHow does the shape of a daily travel profile change by mode, and what happens when the morning peak becomes more pronounced?\nThe chart below is generated in the reader’s browser with Observable JS. It needs no server and works on a static GitHub Pages site."
+  },
+  {
+    "objectID": "articles/interactive-network-demo/index.html#explore-the-profile",
+    "href": "articles/interactive-network-demo/index.html#explore-the-profile",
+    "title": "An interactive transport profile",
+    "section": "Explore the profile",
+    "text": "Explore the profile\n\n\nShow the code\nviewof mode = Inputs.radio(\n  [\"Cycle\", \"Walk\", \"Bus\"],\n  {value: \"Cycle\", label: \"Mode\"}\n)\n\nviewof peakFactor = Inputs.range(\n  [0.6, 1.6],\n  {value: 1, step: 0.05, label: \"Peak intensity\"}\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nhours = Array.from({length: 24}, (_, hour) =&gt; hour)\n\nmodeSettings = ({\n  Cycle: {base: 18, morning: 64, evening: 52, colour: \"#008b7a\"},\n  Walk:  {base: 28, morning: 40, evening: 36, colour: \"#d95d45\"},\n  Bus:   {base: 24, morning: 82, evening: 68, colour: \"#2f6f9f\"}\n})\n\nprofile = hours.map(hour =&gt; {\n  const settings = modeSettings[mode]\n  const morningPeak = settings.morning * peakFactor * Math.exp(-0.5 * ((hour - 8) / 1.65) ** 2)\n  const eveningPeak = settings.evening * peakFactor * Math.exp(-0.5 * ((hour - 17) / 2.05) ** 2)\n  const nightReduction = hour &lt; 6 || hour &gt; 22 ? -settings.base * 0.72 : 0\n\n  return {\n    hour,\n    trips: Math.max(2, Math.round(settings.base + morningPeak + eveningPeak + nightReduction))\n  }\n})\n\nPlot.plot({\n  width,\n  height: Math.max(300, Math.min(390, width * 0.62)),\n  marginLeft: 58,\n  marginBottom: 48,\n  style: {fontSize: \"13px\", background: \"transparent\"},\n  x: {label: \"Hour of day\", domain: [0, 23], ticks: 12},\n  y: {label: \"Synthetic trips\", grid: true, domain: [0, 180]},\n  marks: [\n    Plot.ruleY([0]),\n    Plot.areaY(profile, {\n      x: \"hour\",\n      y: \"trips\",\n      fill: modeSettings[mode].colour,\n      fillOpacity: 0.16,\n      curve: \"catmull-rom\"\n    }),\n    Plot.lineY(profile, {\n      x: \"hour\",\n      y: \"trips\",\n      stroke: modeSettings[mode].colour,\n      strokeWidth: 3,\n      curve: \"catmull-rom\",\n      tip: true\n    }),\n    Plot.dot(profile, {\n      x: \"hour\",\n      y: \"trips\",\n      fill: modeSettings[mode].colour,\n      r: 2.5,\n      tip: true\n    })\n  ]\n})"
+  },
+  {
+    "objectID": "articles/interactive-network-demo/index.html#what-to-look-for",
+    "href": "articles/interactive-network-demo/index.html#what-to-look-for",
+    "title": "An interactive transport profile",
+    "section": "What to look for",
+    "text": "What to look for\nThe demonstration deliberately separates three elements:\n\nThe baseline represents movement that occurs throughout the day.\nTwo Gaussian peaks represent morning and evening demand.\nThe control applies the same multiplier to both peaks, making the assumption visible and easy to challenge.\n\nChanging mode swaps in a different set of synthetic parameters. Walking has a flatter profile; bus travel has stronger commute peaks; cycling sits between them. These are illustrative shapes only, not empirical estimates."
+  },
+  {
+    "objectID": "articles/interactive-network-demo/index.html#reproduce-or-adapt-it",
+    "href": "articles/interactive-network-demo/index.html#reproduce-or-adapt-it",
+    "title": "An interactive transport profile",
+    "section": "Reproduce or adapt it",
+    "text": "Reproduce or adapt it\nThe complete calculation is in the code cell above. A real analysis could replace modeSettings with a CSV file, an API response or the output of an R/Python data pipeline. Quarto can then keep the narrative, citations, code and interactive result together in one page.\nFor a production analysis I would also record:\n\nthe source, licence and retrieval date of every input;\ncleaning and exclusion decisions;\nthe software environment or lockfile;\nuncertainty and sensitivity checks; and\na stable snapshot of any source that changes over time.\n\nThat is the pattern this site is set up to support."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m James Hulse, a data scientist based in Manchester. I work with data to understand transport, infrastructure and place, using tools including R, Python and spatial analysis.\nThis site is my space for publishing work in the open. Some pieces will be short notes; others will be full reproducible vignettes with code, data provenance, assumptions and interactive outputs. The aim is simple: make the route from question to conclusion visible."
+  },
+  {
+    "objectID": "about.html#elsewhere",
+    "href": "about.html#elsewhere",
+    "title": "About",
+    "section": "Elsewhere",
+    "text": "Elsewhere\n\nGitHub — code, projects and contributions\nOpenInfra — collaborative work on open transport infrastructure data\n\nUnless an article says otherwise, views expressed here are my own."
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html",
+    "href": "articles/reproducible-vignette-pattern/index.html",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "",
+    "text": "Reproducibility is not achieved by adding a repository link at the end of an article. It starts with the way the analysis is organised and explained.\nThis is the default pattern I plan to use for longer technical pieces on this site."
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#begin-with-a-precise-question",
+    "href": "articles/reproducible-vignette-pattern/index.html#begin-with-a-precise-question",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "1. Begin with a precise question",
+    "text": "1. Begin with a precise question\nState what the analysis is trying to learn before introducing tools or data. A reader should be able to tell what would count as an answer—and what falls outside the scope."
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#describe-the-evidence",
+    "href": "articles/reproducible-vignette-pattern/index.html#describe-the-evidence",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "2. Describe the evidence",
+    "text": "2. Describe the evidence\nRecord each input’s source, coverage, retrieval date and licence. If a dataset changes over time, keep a stable snapshot or an exact version identifier.\n\n\n\nField\nWhat to record\n\n\n\n\nSource\nPublisher and canonical URL\n\n\nCoverage\nGeography, dates and population\n\n\nVersion\nRelease, retrieval date or checksum\n\n\nLicence\nReuse terms and attribution\n\n\nKnown limits\nGaps, biases and measurement issues"
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#keep-transformations-visible",
+    "href": "articles/reproducible-vignette-pattern/index.html#keep-transformations-visible",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "3. Keep transformations visible",
+    "text": "3. Keep transformations visible\nCode should sit close to the claim it supports. Long setup sections can be folded by default, while decisive filters, joins and model choices remain easy to inspect.\n# A deliberately small example of an auditable transformation\ndaily_counts |&gt;\n  dplyr::filter(!is.na(mode)) |&gt;\n  dplyr::count(date, mode, wt = trips, name = \"trips\")"
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#put-interpretation-beside-output",
+    "href": "articles/reproducible-vignette-pattern/index.html#put-interpretation-beside-output",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "4. Put interpretation beside output",
+    "text": "4. Put interpretation beside output\nA chart does not explain itself. Describe the dominant pattern, the comparison that matters and the uncertainty that should temper the conclusion. Interactive controls should reveal a meaningful choice—not decorate the page."
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#make-rerunning-realistic",
+    "href": "articles/reproducible-vignette-pattern/index.html#make-rerunning-realistic",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "5. Make rerunning realistic",
+    "text": "5. Make rerunning realistic\nFor R or Python work, pin dependencies with renv or a Python environment file. Quarto’s frozen computations can preserve article outputs between runs, while the environment files explain how to recreate them.\n\n\n\n\n\n\nNote\n\n\n\nThis site uses freeze: auto. When a computational article is rendered locally, its results can be committed in _freeze/; the publishing action can then rebuild the website without rerunning every historical analysis."
+  },
+  {
+    "objectID": "articles/reproducible-vignette-pattern/index.html#finish-with-boundaries",
+    "href": "articles/reproducible-vignette-pattern/index.html#finish-with-boundaries",
+    "title": "A practical pattern for reproducible vignettes",
+    "section": "6. Finish with boundaries",
+    "text": "6. Finish with boundaries\nSay what the analysis cannot establish, what would change the conclusion, and what should be tried next. That final section is often more useful than a polished summary.\nThe template in this repository turns these headings into a practical starting point for the next vignette."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "These are projects I have contributed to or use as a home for open, reproducible work.\n\n\nOpenInfra\nOpen tools, datasets and documentation for understanding transport infrastructure, developed collaboratively at the University of Leeds.\nView the project · Source on GitHub\n\n\nThis website\nA Quarto publishing system for articles, analysis and interactive vignettes. The complete source and revision history are public.\nSource on GitHub\n\n\nMore projects can be added here as they are ready to share. Each can link to a repository, a live tool, or a longer case study on this site."
+  }
+]
