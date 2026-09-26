@@ -3,6 +3,19 @@
 James Hulse's personal Quarto website for articles, analysis and reproducible
 vignettes. The published site will live at <https://hulsiejames.github.io>.
 
+## Authoring and publishing guide
+
+See [AUTHORING.md](AUTHORING.md) for the complete workflow for:
+
+- creating writings and reproducible vignettes;
+- adding projects to the Projects page;
+- including images, data and interactive outputs;
+- previewing and checking changes locally; and
+- uploading to GitHub and publishing the live site.
+
+The shortest version is: edit the source on `main`, run `quarto render`, commit
+and push. GitHub Actions then builds and publishes the site automatically.
+
 ## Preview locally
 
 ```powershell
@@ -31,6 +44,9 @@ pushed to `main`.
 The Writing page and homepage listings update automatically from article
 metadata. Set `draft: true` in an article's front matter to keep unfinished work
 out of the published site.
+
+For worked examples, front-matter guidance and exact Git commands, use the
+[full authoring guide](AUTHORING.md).
 
 ## Reproducible computation
 
